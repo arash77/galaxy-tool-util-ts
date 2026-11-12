@@ -1,5 +1,19 @@
 # @galaxy-tool-util/schema
 
+## 1.16.0
+
+### Minor Changes
+
+- [#217](https://github.com/jmchilton/galaxy-tool-util-ts/pull/217) [`b30808f`](https://github.com/jmchilton/galaxy-tool-util-ts/commit/b30808fe5dd1769f66fd9cf69a706ec6cb299b72) Thanks [@jmchilton](https://github.com/jmchilton)! - `nextDraftStep` work items now show the edges around a `TODO_*` port: an in port's sources (`sourced from 'reads'`, `no source: default value`, `no source: unwired`) and the steps consuming an out port (`consumed by 'second/TODO_input'`). `validateDraft` now reports a `TODO_*` input port with no source and no non-null default as a topology error, so `TODO_x: {}` fails `gxwf draft-validate`.
+
+- [#228](https://github.com/jmchilton/galaxy-tool-util-ts/pull/228) [`69e1763`](https://github.com/jmchilton/galaxy-tool-util-ts/commit/69e176395b2ec21abe7654f516f835086654ce10) Thanks [@jmchilton](https://github.com/jmchilton)! - `validateDraft` now reports steps that form a dependency cycle, including a step sourcing its own output, as a topology error, so `gxwf draft-validate` rejects cyclic drafts. Each error names a group of steps that depend on each other through a cycle, not steps merely downstream of one.
+
+### Patch Changes
+
+- [#227](https://github.com/jmchilton/galaxy-tool-util-ts/pull/227) [`0e74a2f`](https://github.com/jmchilton/galaxy-tool-util-ts/commit/0e74a2f00689421a493fbade8ba4a080cf12863f) Thanks [@jmchilton](https://github.com/jmchilton)! - Check frame `contains_steps` / `contains_comments` labels. `gxwf lint` reports an entry that names no step, input or comment as a `FrameReferenceNotFound` error and warns on an empty frame (`FrameIsEmpty`). `toNative` and `gxwf convert` fail with the same message instead of writing `child_steps: [null]`.
+
+  Dict-form `comments` now keep an explicit `label` over the map key, matching gxformat2.
+
 ## 1.15.0
 
 ### Minor Changes
